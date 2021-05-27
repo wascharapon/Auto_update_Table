@@ -1,0 +1,28 @@
+
+
+function count_location_distance() {
+   $.ajaxSetup({
+       cache: false,
+       contentType: false,
+       processData: false
+   });
+   var id;
+   $(".count_location_distance").each(function (index) {
+       id = $(this).attr("lt_id");
+       if ($(this).text() == "-") {
+           $.ajax({
+               type: "get",
+               url: "count_location_distance/" + id + "/",
+               success: function (data) {
+                   $(".count_location_distance:eq(" + index + ")").html(data)
+               }
+           }).done(function () {});
+       } 
+   });
+   setTimeout(function () {
+       $(".paginate_button").click(function () {
+           count_location_distance();
+       });
+   }, 200);
+}
+
